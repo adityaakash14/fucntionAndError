@@ -1,30 +1,25 @@
 // SPDX-License-Identifier: MIT
 pragma solidity ^0.8.0;
 
-contract AssertionExample {
+contract myContract {
     uint256 public value;
 
-    function setValue(uint256 _newValue) external {
-        // Use require() to check conditions and revert if they're not met
-        require(_newValue > value, "New value must be greater than the current value");
+    function setValue(uint256 _newValue) public {
+        // Using require() to validate inputs
+        require(_newValue > 0, "Value must be greater than 0");
         
         value = _newValue;
     }
 
-    function assertExample(uint256 _input) external pure returns (uint256) {
-        // Use assert() to check for invariants and revert if they're violated
-        uint256 result = _input * 2;
-        assert(result > _input);
+    function assertExample(uint256 _a, uint256 _b) public pure returns (uint256) {
+        // Using assert() for internal consistency checks
+        assert(_a != _b);
         
-        return result;
+        return _a + _b;
     }
 
-    function revertExample(uint256 _input) external pure returns (uint256) {
-        // Use revert() to explicitly revert the transaction with a custom message
-        if (_input == 0) {
-            revert("Input cannot be zero");
-        }
-        
-        return 100 / _input;
+    function revertExample() public pure {
+        // Using revert() to intentionally trigger a revert
+        revert("This function always reverts");
     }
 }
